@@ -1,7 +1,15 @@
 package dias.matheus.backendv1.blog.classes;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -13,8 +21,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String password) {
-        this.id = id;
+    public User(String name, String email, String password) {
         this.name = name;
         this.email= email;
         this.password = password;

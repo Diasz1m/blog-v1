@@ -1,5 +1,6 @@
 package dias.matheus.backendv1.blog.classes;
 
+import dias.matheus.backendv1.blog.enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,13 +19,19 @@ public class User {
 
     private String password;
 
+    private UserRole role;
+
+
+
     public User() {
+        this.role = UserRole.USER;
     }
 
     public User(String name, String email, String password) {
         this.name = name;
         this.email= email;
         this.password = password;
+        this.role = UserRole.USER;
     }
 
     public Long getId() {

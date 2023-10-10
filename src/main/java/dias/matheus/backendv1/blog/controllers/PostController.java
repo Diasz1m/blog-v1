@@ -1,6 +1,7 @@
 package dias.matheus.backendv1.blog.controllers;
 
 
+import dias.matheus.backendv1.blog.classes.Message;
 import dias.matheus.backendv1.blog.classes.Post;
 import dias.matheus.backendv1.blog.repositories.PostRepository;
 import dias.matheus.backendv1.blog.repositories.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/posts")
@@ -27,26 +29,41 @@ public class PostController {
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String addPost(@RequestBody Post content) {
+    public Message addPost(@RequestBody Post content) {
         Post post = new Post();
         post.setContent(content.getContent());
         post.setTitle(content.getTitle());
         post.setCreatedAt(new Date());
-//        User user = userRepository.findById((Integer) httpSession.getAttribute("userId")).get();
-        post.setUserId(userRepository.findById((Integer) httpSession.getAttribute("userId")).get());
+//    post.setUserId(userRepository.findById((Integer) httpSession.getAttribute("userId")).get());
+        post.setUserId(userRepository.findById(1).get());
 
-        postRepository.save(post);
+        try {
+            postRepository.save(post);
+        } catch (Exception e) {
+            return new Message("Erro ao salvar post", Message.ERROR);
+        }
 
-        return "Saved";
+        return new Message("Post salvo com sucesso", Message.SUCCESS);
     }
 
     @GetMapping("/all")
-    public @ResponseBody Iterable<Post> getAllPosts() {
-        return postRepository.findAll();
+    public @ResponseBody List<Post> getAllPosts() {
+
+        try {
+            return postRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/get/{id}")
     public @ResponseBody Post getPost(@PathVariable Integer id) {
-        return postRepository.findById(id).get();
+
+        try {
+            return postRepository.findById(id).get();
+        }catch (
+                Exception e) {
+            throw new RuntimeException(e);
+            }
     }
 }

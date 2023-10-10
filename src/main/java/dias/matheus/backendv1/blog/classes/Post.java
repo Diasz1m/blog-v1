@@ -1,20 +1,13 @@
 package dias.matheus.backendv1.blog.classes;
 
-import dias.matheus.backendv1.blog.repositories.UserRepository;
 import jakarta.persistence.*;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
 @Entity
 public class Post {
 
-    @Autowired
-    public HttpSession httpSession;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +19,11 @@ public class Post {
 
     private Date createdAt;
 
-     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-     @JoinColumn(name = "id", referencedColumnName = "id",  insertable = false, updatable = false)
-    private User id_user;
+    private Long test;
+
+     @OneToOne()
+    @PrimaryKeyJoinColumn()
+     private User id_user;
 
     public Post() {
     }

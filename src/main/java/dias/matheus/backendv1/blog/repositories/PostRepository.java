@@ -21,4 +21,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("Select p from Post p where p.id_user = ?1")
     Iterable<Post> findByUserId(@Param("id") Integer id);
+    
+    /* BUSCAR POST POR DESCRIÇÃO */
+    @Query("Select p from Post p where p.description like ?1")
+    Iterable<Post> findByContent(@Param("content") String content);
+    
 }

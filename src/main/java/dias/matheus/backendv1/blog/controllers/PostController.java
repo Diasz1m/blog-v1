@@ -66,4 +66,15 @@ public class PostController {
             throw new RuntimeException(e);
             }
     }
+
+    @GetMapping("/getByContent")
+    public @ResponseBody List<Post> getPostByContent(@requestBody String content)
+    {
+      try {
+	return postRepository.findByContent(content).get();
+      } catch(Exception e)
+      {
+	throw new RunTimeException(e);
+      }
+    }
 }

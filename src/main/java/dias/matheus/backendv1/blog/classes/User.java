@@ -34,6 +34,13 @@ public class User {
         this.role = UserRole.USER;
     }
 
+    public User(User userDTO) {
+        this.name = userDTO.getName();
+        this.email = userDTO.getEmail();
+        this.password = userDTO.getPassword();
+        this.role = UserRole.USER;
+    }
+
     public Long getId() {
         return id;
     }

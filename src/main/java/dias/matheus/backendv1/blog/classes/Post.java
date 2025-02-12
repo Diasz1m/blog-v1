@@ -19,8 +19,6 @@ public class Post {
 
     private Date createdAt;
 
-    private Long test;
-
      @OneToOne()
     @PrimaryKeyJoinColumn()
      private User id_user;

@@ -22,6 +22,7 @@ public class PostController {
     @Autowired
     public PostRepository postRepository;
 
+
     @Autowired
     public HttpSession httpSession;
     @Autowired
@@ -34,8 +35,8 @@ public class PostController {
         post.setContent(content.getContent());
         post.setTitle(content.getTitle());
         post.setCreatedAt(new Date());
-//    post.setUserId(userRepository.findById((Integer) httpSession.getAttribute("userId")).get());
-        post.setUserId(userRepository.findById(1).get());
+
+        post.setUserId(content.getId_user());
 
         try {
             postRepository.save(post);

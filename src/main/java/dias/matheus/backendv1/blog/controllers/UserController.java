@@ -66,17 +66,33 @@ public class UserController {
 
     @GetMapping("/all")
     public @ResponseBody Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+        try
+        {
+            return userRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/get/{id}")
     public @ResponseBody User getUser(@PathVariable Integer id) {
-        return userRepository.findById(id).get();
+        try
+        {
+
+            return userRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
     public @ResponseBody ResponseEntity deleteUser(@PathVariable Integer id) {
-        userRepository.deleteById(id);
-        return ResponseEntity.ok("Deleted");
+        try {
+            userRepository.deleteById(id);
+            return ResponseEntity.ok("Deleted");
+        } catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }

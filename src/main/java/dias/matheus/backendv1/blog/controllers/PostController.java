@@ -6,7 +6,6 @@ import dias.matheus.backendv1.blog.classes.Post;
 import dias.matheus.backendv1.blog.repositories.PostRepository;
 import dias.matheus.backendv1.blog.repositories.UserRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +18,9 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class PostController {
 
-    @Autowired
     public PostRepository postRepository;
 
-
-    @Autowired
     public HttpSession httpSession;
-    @Autowired
     private UserRepository userRepository;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,13 +64,13 @@ public class PostController {
     }
 
     @GetMapping("/getByContent")
-    public @ResponseBody List<Post> getPostByContent(@requestBody String content)
+    public @ResponseBody Iterable<Post> getPostByContent(@RequestBody String content)
     {
       try {
-	return postRepository.findByContent(content).get();
+	    return postRepository.findByContent(content);
       } catch(Exception e)
       {
-	throw new RunTimeException(e);
+          throw new RuntimeException(e);
       }
     }
 }

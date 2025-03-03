@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public @ResponseBody ResponseEntity addUser(@RequestBody User userBody) {
+    public @ResponseBody ResponseEntity<String> addUser(@RequestBody User userBody) {
 
         User email = this.userRepository.findByEmail(userBody.getEmail());
 
@@ -86,7 +86,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public @ResponseBody ResponseEntity deleteUser(@PathVariable Integer id) {
+    public @ResponseBody ResponseEntity<String> deleteUser(@PathVariable Integer id) {
         try {
             userRepository.deleteById(id);
             return ResponseEntity.ok("Deleted");

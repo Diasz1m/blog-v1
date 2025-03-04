@@ -1,6 +1,8 @@
 package dias.matheus.backendv1.blog.classes;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -14,7 +16,9 @@ public class Post {
     private Long id;
 
 
+    @Getter
     private String title;
+    @Setter
     private String content;
 
     private String description;
@@ -35,20 +39,12 @@ public class Post {
         this.id_user = getId_user();
     }
 
-    public String getTitle() {
-        return this.title;
-    }
-
     public String getContent() {
         return this.content;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Date getCreatedAt() {
